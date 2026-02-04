@@ -1,7 +1,7 @@
 name: Facebook Live Stream Modern
 
 on:
-  workflow_dispatch: # لتشغيل البث يدوياً
+  workflow_dispatch: # تشغيل يدوي
 
 jobs:
   stream:
@@ -12,11 +12,11 @@ jobs:
 
       - name: Start Streaming
         run: |
-          ffmpeg -re -i "${{ secrets.STREAM_URL }}" \
+          ffmpeg -re -i "http://135.125.109.73:9000/Alwan%20Sport%201%20HD%20VIP%20Arb_.m3u8" \
           -vf "scale=1300:-1,crop=1280:720, \
           drawtext=text='BALLONTV':x=w-tw-30:y=30:fontsize=35:fontcolor=white@0.8:box=1:boxcolor=black@0.4, \
           drawtext=text='اضغط متابعة ليصلك بث المباريات':x=(w-tw)/2:y=h-th-40:fontsize=28:fontcolor=yellow:box=1:boxcolor=black@0.5, \
           eq=brightness=0.03:contrast=1.1:saturation=1.2" \
           -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k \
           -pix_fmt yuv420p -g 60 -c:a aac -b:a 128k -ar 44100 \
-          -f flv "${{ secrets.FB_URL }}"
+          -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-122122568955122511-1-Ab6fsdcpPrGUMSit4wacTaWs"
